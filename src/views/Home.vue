@@ -18,7 +18,7 @@
                         <span>Prime : <b class="primary--text">{{ totalBonus | currency }}</b> brut 💰</span>
                     </v-chip>
 
-                    <h2 class="text-right" v-else>
+                    <h2 class="text-right white--text" v-else>
                         Commencez par ajouter une prime 😁⬆️
                     </h2>
                 </v-col>
@@ -76,7 +76,7 @@
                                     <v-text-field dense :label="bonus.name" hide-details v-model="bonus.value" outlined type="number" :max="bonus.maxValue"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" md="6">
-                                    <v-text-field dense label="Valeur maximum" hide-details v-model="bonus.maxValue" outlined type="number"></v-text-field>
+                                    <v-text-field dense label="Valeur max" hide-details v-model="bonus.maxValue" outlined type="number"></v-text-field>
                                 </v-col>
                             </v-row>
                         </v-card-text>
