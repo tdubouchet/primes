@@ -14,7 +14,7 @@
         <v-card-text>
             <v-row>
                 <v-col cols="12" class="text-center">
-                    <v-chip style="display:block" color="white" x-large label v-if="bonuses.length">
+                    <v-chip style="display:block;font-size: 25px" color="white" x-large label v-if="bonuses.length">
                         <span>Prime : <b class="primary--text">{{ totalBonus | currency }}</b> brut 💰</span>
                     </v-chip>
 
