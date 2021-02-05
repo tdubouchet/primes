@@ -78,6 +78,10 @@
                                 <v-col cols="12" md="6">
                                     <v-text-field dense label="Valeur max" hide-details v-model="bonus.maxValue" outlined type="number"></v-text-field>
                                 </v-col>
+
+                                <v-col cols="12">
+                                    <v-text-field dense label="Prime" hide-details v-model="bonus.bonusValue" outlined type="number"></v-text-field>
+                                </v-col>
                             </v-row>
                         </v-card-text>
                     </v-card>
