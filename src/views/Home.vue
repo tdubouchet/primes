@@ -1,8 +1,8 @@
 <template>
-    <v-card max-width="800" class="mx-auto mt-5" elevation="0">
-        <v-toolbar flat dense>
+    <v-card max-width="800" class="mx-auto mt-5 pt-5" elevation="0" color="transparent">
+        <v-toolbar color="transparent" flat dense>
             <v-toolbar-title>
-                <span class="subheading">Calculateur de primes 🚀</span>
+                <span class="subheading white--text">Calculateur de primes 🚀</span>
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
@@ -10,12 +10,11 @@
             <CreateBonusModal v-on:addBonus="addBonus"></CreateBonusModal>
         </v-toolbar>
 
-        <v-divider class="ma-5"></v-divider>
 
         <v-card-text>
             <v-row>
                 <v-col cols="12" class="text-center">
-                    <v-chip x-large label v-if="bonuses.length">
+                    <v-chip style="display:block" color="white" x-large label v-if="bonuses.length">
                         <span>Prime : <b class="primary--text">{{ totalBonus | currency }}</b> brut 💰</span>
                     </v-chip>
 
@@ -25,7 +24,7 @@
                 </v-col>
 
                 <v-col>
-                    <v-card class="mt-3" v-for="(bonus, index) in bonuses" :key="`bonus_${index}`">
+                    <v-card elevation="15" class="mt-3" v-for="(bonus, index) in bonuses" :key="`bonus_${index}`">
                         <v-toolbar flat dense>
                             <v-toolbar-title>
                                 <span class="subheading text-uppercase">{{ bonus.name }}</span>
@@ -34,6 +33,10 @@
 
                             <v-btn dark icon>
                                 <v-icon>mdi-dots-vertical</v-icon>
+                            </v-btn>
+
+                            <v-btn icon color="primary" @click="editBonus(bonus)">
+                                <v-icon>mdi-cogs</v-icon>
                             </v-btn>
 
                             <v-btn icon color="red" @click="deleteBonus(index)">
@@ -68,11 +71,11 @@
                                 </template>
                             </v-slider>
 
-                            <v-row>
-                                <v-col>
+                            <v-row v-show="bonus.edit">
+                                <v-col cols="12" md="6">
                                     <v-text-field dense :label="bonus.name" hide-details v-model="bonus.value" outlined type="number" :max="bonus.maxValue"></v-text-field>
                                 </v-col>
-                                <v-col>
+                                <v-col cols="12" md="6">
                                     <v-text-field dense label="Valeur maximum" hide-details v-model="bonus.maxValue" outlined type="number"></v-text-field>
                                 </v-col>
                             </v-row>
@@ -121,6 +124,10 @@ export default {
     methods : {
         addBonus(bonus) {
             this.bonuses.push(bonus);
+        },
+
+        editBonus(bonus) {
+            this.$set(bonus, 'edit', !bonus.edit);
         },
 
         deleteBonus(index) {
