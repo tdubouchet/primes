@@ -1,14 +1,16 @@
 <template>
-    <v-card max-width="800" class="mx-auto" elevation="0">
+    <v-card max-width="800" class="mx-auto mt-5" elevation="0">
         <v-toolbar flat dense>
             <v-toolbar-title>
-                <span class="subheading">Calculateur de prime 🚀</span>
+                <span class="subheading">Calculateur de primes 🚀</span>
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
 
             <CreateBonusModal v-on:addBonus="addBonus"></CreateBonusModal>
         </v-toolbar>
+
+        <v-divider class="ma-5"></v-divider>
 
         <v-card-text>
             <v-row>
@@ -17,9 +19,9 @@
                         <span>Prime : <b class="primary--text">{{ totalBonus | currency }}</b> brut 💰</span>
                     </v-chip>
 
-                    <h4 v-else>
-                        Commencez par ajouter une prime
-                    </h4>
+                    <h2 class="text-right" v-else>
+                        Commencez par ajouter une prime 😁⬆️
+                    </h2>
                 </v-col>
 
                 <v-col>
@@ -43,6 +45,7 @@
                             <v-row class="mb-4" justify="space-between">
                                 <v-col class="text-left">
                                     <span class="display-3 font-weight-light">
+                                        {{ bonus | icon }}
                                         <span v-if="bonus.type === 'percentage'">
                                             {{ bonus.value | currency }}
                                         </span>
@@ -140,6 +143,33 @@ export default {
     filters : {
         currency(value) {
             return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(value)
+        },
+
+        icon(bonus) {
+            let percentage = (bonus.value * 100) / bonus.maxValue;
+
+            if(!isNaN(percentage)) {
+                percentage = percentage.toFixed(0);
+            } else {
+                percentage = 0;
+            }
+
+            percentage = parseInt(percentage);
+
+            switch (true) {
+                case percentage < 20 :
+                    return "💩"
+                case percentage >= 20 && percentage < 40 :
+                    return "😂"
+                case percentage >= 40 && percentage < 60 :
+                    return "🙂"
+                case percentage >= 60 && percentage < 80 :
+                    return "😎"
+                case percentage >= 80 && percentage < 100 :
+                    return "😱"
+                case percentage === 100 :
+                    return "🚀"
+            }
         }
     },
 

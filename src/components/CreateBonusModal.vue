@@ -8,7 +8,7 @@
         <v-card>
             <v-form @submit.prevent="addBonus">
                 <v-card-title>
-                    Nouvelle prime
+                    Nouvelle prime 😎
                 </v-card-title>
 
                 <v-divider></v-divider>
